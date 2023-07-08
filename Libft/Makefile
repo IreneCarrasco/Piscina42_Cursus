@@ -1,0 +1,55 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: icarrasc <icarrasc@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/06 16:04:43 by icarrasc          #+#    #+#              #
+#    Updated: 2023/01/14 11:57:39 by icarrasc         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	= libft.a
+
+
+SRCS	= ft_isascii.c ft_isprint.c ft_isalpha.c ft_isdigit.c ft_isalnum.c\
+		ft_tolower.c ft_toupper.c ft_bzero.c ft_memset.c ft_memcpy.c\
+		ft_memmove.c ft_memchr.c ft_memcmp.c ft_strdup.c ft_calloc.c\
+		ft_strlen.c ft_strchr.c ft_strrchr.c ft_strnstr.c ft_atoi.c\
+		ft_strncmp.c ft_strlcpy.c ft_strlcat.c ft_substr.c ft_strjoin.c\
+		ft_strtrim.c ft_split.c ft_strmapi.c ft_putchar_fd.c ft_putstr_fd.c\
+		ft_striteri.c ft_putendl_fd.c ft_putnbr_fd.c ft_itoa.c
+SRCSBONUS	=  ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c\
+			ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c\
+			ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
+OBJS	= $(SRCS:.c=.o)
+OBJSBONUS	= $(SRCSBONUS:.c=.o)
+
+
+CC		= clang
+CFLAGS	= -Wall -Wextra -Werror
+RM		= /bin/rm -f
+
+all:		$(NAME)
+
+$(NAME):	$(OBJS)
+			gcc -c $(CFLAGS) $(SRCS)
+			@ar -rcs $(NAME) $(OBJS)
+			@ranlib $(NAME)
+
+clean:
+			@$(RM) $(OBJS)
+			rm -f $(OBJS)
+
+fclean:		clean
+			@$(RM) $(NAME)
+
+bonus:		$(OBJSBONUS)
+			gcc -c $(CFLAGS) $(SRCSBONUS)
+			@ar -rcs $(NAME) $(OBJSBONUS)
+			@ranlib $(NAME)
+
+re:			fclean all
+
+.PHONY:		all clean fclean bonus re
